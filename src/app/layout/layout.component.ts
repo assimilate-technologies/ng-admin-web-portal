@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-
+  collapedSideBar!: boolean;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  receiveCollapsed($event: any) {
+    this.collapedSideBar = $event;
+  }
 }
