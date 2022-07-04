@@ -1,1 +1,72 @@
-<p>login works!</p>
+<div  class="login-page">
+
+
+    <div class="row  justify-content-md-center">
+  
+        <div class="col-md-4">
+           
+            <h1>Sign In</h1>
+            <form role="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input id="userName" [placeholder]="'Username'"
+                            class="form-control input-underline input-lg" type="email" formControlName="email"
+                             disallow-spaces />
+                        <div class="text-danger"
+                            *ngIf="submitted || (f['userName']?.touched && f['userName']?.invalid)">
+                            <p class="fa fa-exclamation-triangle" *ngIf="submitted && (f['userName']?.errors?.['required'])">
+                                Username is required.
+                            </p>
+                            <p class="fa fa-exclamation-triangle" *ngIf="f['userName']?.errors?.['minlength']">
+                                Username cannot be less than 2 characters
+                            </p>
+                            <!-- <p class="fa fa-exclamation-triangle" *ngIf="f['userName']?.errors?.['maxlength']">
+                                Username cannot be more than 20 characters
+                            </p> -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input id="password" [placeholder]="'Password'"
+                            class="form-control input-underline input-lg" [type]="show_button ? 'text' : 'password'"
+                            formControlName="password" maxlength="20" disallow-spaces />
+
+                        <i (click)="showPassword()"
+                            [class]="show_eye ? 'fa fa-eye field-icon' : 'fa fa-eye-slash field-icon'"></i>
+
+
+                        <div class="text-danger"
+                            *ngIf="submitted || (f['password']?.touched && f['password']?.invalid)">
+                            <p class="fa fa-exclamation-triangle" *ngIf="submitted && (f['password']?.errors?.['required'])">
+                                Password is required.
+                            </p>
+                            <p class="fa fa-exclamation-triangle" *ngIf="f['password']?.errors?.['minlength']">
+                                Password cannot be less than 5 characters
+                            </p>
+                            <p class="fa fa-exclamation-triangle" *ngIf="f['password']?.errors?.['maxlength']">
+                                Password cannot be more than 20 characters
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-danger" *ngIf="isErrorFound">
+                            <p class="fa fa-exclamation-triangle danger">{{errorResponse?.message}}</p>
+                        </div>
+                    </div>
+                </div>
+                <a [routerLink]="['/forgot-password']">{{ 'Forgot Password ?'}}</a>
+                &nbsp;
+                <button type="submit" class="btn rounded-btn">
+                    {{'Log in'}}
+                </button>
+                &nbsp;
+             
+            </form>
+        </div>
+        <div class="col-md-4" class="row  justify-content-md-center">
+            <div class="col-md-4 ml-3 ">
+                <!-- <img src="/assets/images/logo.png" width="70%" alt="image not found"> -->
+            </div>
+        </div>
+    </div>
+</div>

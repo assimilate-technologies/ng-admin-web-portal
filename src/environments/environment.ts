@@ -3,8 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_URL:"http://localhost:9000/",
+  toDownloadQRCode: true,
+  refreshTokenInternal: 60000, // Check everyminute if token expired
+  // appVersion: require('../../package.json').version,
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
