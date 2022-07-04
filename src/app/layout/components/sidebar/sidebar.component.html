@@ -1,68 +1,36 @@
-<aside class="left-sidebar" data-sidebarbg="skin6">
-    <!-- Sidebar scroll-->
-    <div class="scroll-sidebar">
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav">
-            <ul id="sidebarnav">
-                <!-- User Profile-->
-                <li class="sidebar-item pt-2">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.html"
-                        aria-expanded="false">
-                        <i class="far fa-clock" aria-hidden="true"></i>
-                        <span class="hide-menu">Dashboard</span>
-                    </a>
+<nav [ngClass]="{ sidebarPushRight: isActive, collapsed: collapsed }" class="sidebar">
+    <div class="list-group mt-2">
+        <ng-template ngFor let-menu [ngForOf]="menuItems">
+            <div class="nested-menu" *ngIf="menu.submenu.length>0;else simpleMenu">
+                <a class="m-2" (click)="addExpandClass(menu?.expandLink)" class="list-group-item"
+                    [class.active]="router.url===menu.routerLink">
+                    <i class="fa fa-fw {{menu.icon}}"></i>
+                    <span>{{ menu.routeName}}</span>
+                </a>
+                <li [class.expand]="showMenu === menu?.expandLink" class="nested">
+                    <ul class="submenu">
+                        <li *ngFor="let smenu of menu.submenu">
+                            <a (click)="navigateToPage(smenu)" class="list-group-item"
+                                [class.active]="router.url===smenu.routerLink">
+                                <i class="fa {{smenu.icon}}"></i>&nbsp;
+                                <span>{{smenu.routeName}}</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="profile.html"
-                        aria-expanded="false">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                        <span class="hide-menu">Profile</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="basic-table.html"
-                        aria-expanded="false">
-                        <i class="fa fa-table" aria-hidden="true"></i>
-                        <span class="hide-menu">Basic Table</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="fontawesome.html"
-                        aria-expanded="false">
-                        <i class="fa fa-font" aria-hidden="true"></i>
-                        <span class="hide-menu">Icon</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html"
-                        aria-expanded="false">
-                        <i class="fa fa-globe" aria-hidden="true"></i>
-                        <span class="hide-menu">Google Map</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="blank.html"
-                        aria-expanded="false">
-                        <i class="fa fa-columns" aria-hidden="true"></i>
-                        <span class="hide-menu">Blank Page</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="404.html"
-                        aria-expanded="false">
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        <span class="hide-menu">Error 404</span>
-                    </a>
-                </li>
-                <li class="text-center p-20 upgrade-btn">
-                    <a href="#"
-                        class="btn d-grid btn-danger text-white" target="_blank">
-                        Upgrade to Pro</a>
-                </li>
-            </ul>
+            </div>
+            <ng-template #simpleMenu>
+                <a *ngIf="menu.isShow!=false" class="list-group-item" (click)="navigateToPage(menu)"
+                    [class.active]="router.url===menu.routerLink">
+                    <i class="fa fa-fw {{menu.icon}}"></i>
+                    <span>{{ menu.routeName}}</span>
+                </a>
+            </ng-template>
+        </ng-template>
 
-        </nav>
-        <!-- End Sidebar navigation -->
     </div>
-    <!-- End Sidebar scroll-->
-</aside>
+    <div (click)="toggleCollapsed()" [ngClass]="{ collapsed: collapsed }" class="toggle-button">
+        <i class="fa fa-fw fa-angle-double-{{ collapsed ? 'right' : 'left' }}"></i>&nbsp;
+        <span>{{ 'Collapse Sidebar' }}</span>
+    </div>
+</nav>

@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
       this.isErrorFound = false;
       if (this.loginForm.valid) {
         localStorage.setItem('isLoggedin', 'true');
+        this.router.navigate(['/dashboard']);
         //   this.loginService.signin(this.loginForm.value).subscribe({
         //       next: (response: any) => {
         //           localStorage.setItem('isLoggedin', 'true');
