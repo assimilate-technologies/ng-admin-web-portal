@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  API_URL:"http://localhost:9000/",
+  production: true,
+  API_URL:"",
   refreshTokenInternal: 60000, // Check everyminute if token expired
   // appVersion: require('../../package.json').version,
 };

@@ -1,18 +1,24 @@
 <div class="page-breadcrumb bg-white">
     <div class="row align-items-center">
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">Basic Table</h4>
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" *ngIf="pageTitle && pageTitle.isVisible" id="pageheader">
+            <h4 class="page-title">{{pageTitle.title}}  <small>{{pageTitle.smallTitle}}</small></h4>
         </div>
-        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12" *ngIf="!pageTitle?.isHideHomeLink">
             <div class="d-md-flex">
                 <ol class="breadcrumb ms-auto">
-                    <li><a href="/dashboard" class="fw-normal">Dashboard</a></li>
+                    <li><a href="/dashboard" class="fw-normal"> Dashboard </a></li>
                 </ol>
-                <a target="_blank"
+                <!-- <a target="_blank"
                     class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Upgrade
-                    to Pro</a>
+                    to Pro</a> -->
             </div>
         </div>
     </div>
     <!-- /.col-lg-12 -->
 </div>
+
+<!-- <div class="row mb-3" *ngIf="pageTitle && pageTitle.isVisible" id="pageheader">
+    <div class="col-sm-9">
+        <h4 class="text-muted">{{pageTitle.title}} <small>{{pageTitle.smallTitle}}</small></h4>
+    </div>
+</div> -->
